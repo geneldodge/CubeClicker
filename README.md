@@ -2,10 +2,10 @@
 A simple clicker game made with jquery and html only
 
 ##BASIC FUNCTIONALITY
- ###CLICK DAMAGE
+ ##CLICK DAMAGE
    - [x] User does damage when they click the square
    - [x] Damage is displayed and is animated
- ###CRITICAL DAMAGE
+###CRITICAL DAMAGE
    - [ ] Crits show as a different font so they stand out
    - [ ] A critical multiplier is applied to base damage
    - [ ] A critical chance is used to determine when a crit lands
