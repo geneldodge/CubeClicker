@@ -1,0 +1,116 @@
+/* ======== MAIN & SHARED STYLES =========== */
+body {
+	background-color: lightgray;
+}
+
+.main_container {
+	
+}
+
+.no_clicks {
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+}
+
+.no_pointers {
+	pointer-events: none;
+}
+
+/* ======== DAMAGE NUMBER RELATED STYLES =========== */
+.dmg_container {
+	margin: auto;
+	height: 100px;
+	width: 100px;
+}
+
+.dps_num_container {
+	z-index: 4;
+	margin: auto;
+	position: absolute;
+	top: 0px;
+	height: 100px;
+	text-align: center;
+}
+.dmg_num_container {
+	z-index: 5;
+	margin: auto;
+	position: absolute;
+	top: 0px;
+	height: 100px;
+	text-align: center;
+}
+.dmg_nums {
+	margin: auto;
+	position: relative;
+	top: 75px;
+	width: 100px;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.dps_nums {
+	margin: auto;
+	position: relative;
+	top: 75px;
+	width: 100px;
+}
+
+/* === DAMAGE FONT STYLES === */
+.font_dps_dmg {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: gray;
+}
+
+.font_dmg {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #cc6600;
+}
+
+.font_crit_dmg {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #cc6600;
+}
+
+/* ======== ENEMY RELATED STYLES =========== */
+.enemy_container {
+	margin: auto;
+	position: relative;
+	height: 100px;
+}
+
+.enemy_square {
+	position: relative;
+	margin: auto;
+	height: 100px;
+	width: 100px;
+	border: 2px solid black;
+}
+/* ======== HEALTH BAR RELATED STYLES =========== */
+.health_container {
+	margin: auto;
+	position: relative;
+	top: 20px;
+	height: 20px;
+	width: 150px;
+	background-color: gray;
+}
+
+.health_bar {
+	position: absolute;
+	right: 0px;
+	height: 20px;
+	width: 145px;
+	padding-right: 5px;
+	background-color: darkred;
+	color: white;
+	font-weight: bold;
+	text-align: right;
+}
