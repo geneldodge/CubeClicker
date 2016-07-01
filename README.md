@@ -2,6 +2,7 @@
 A simple clicker game made with jquery and html only
 
 ##BASIC FUNCTIONALITY
+
  ##CLICK DAMAGE
    - [x] User does damage when they click the square
    - [x] Damage is displayed and is animated
