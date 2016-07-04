@@ -10,12 +10,53 @@
 
 <body>
 <div class="main_container">
-	<div class="dmg_container no_clicks no_pointers">
-			<div class="dps_num_container no_clicks no_pointers"></div>
-			<div class="dmg_num_container no_clicks no_pointers"></div>
+	<div class="player_stats_container">
+		<div class="player_level no_clicks no_pointers"></div>
+		<div class="player_exp_container no_clicks no_pointers">
+			<div class="player_exp_text no_clicks no_pointers"></div>
+			<div class="player_exp_bar no_clicks no_pointers"></div>
+		</div>
+		<br />
+		<table>
+			<tr>
+				<td class="skill_point_count sp_inactive no_clicks no_pointers">0</td>
+				<td class="no_clicks no_pointers" colspan="3">Skill Points</td>
+			</tr>
+			<tr>
+				<td class="dmg_sp_cell sp_inactive no_clicks no_pointers">+</td>
+				<td class="dmg_sp_count sp_count no_clicks no_pointers"></td>
+				<td class="no_clicks no_pointers">Click Damage:</td>
+				<td class="player_dmg no_clicks no_pointers"></td>
+			</tr>
+			<tr>
+				<td class="dps_sp_cell sp_inactive no_clicks no_pointers">+</td>
+				<td class="dps_sp_count sp_count no_clicks no_pointers"></td>
+				<td class="no_clicks no_pointers">DPS Damage:</td>
+				<td class="player_dps no_clicks no_pointers"></td>
+			</tr>
+			<tr>
+				<td class="crit_chance_sp_cell sp_inactive no_clicks no_pointers">+</td>
+				<td class="crit_chance_sp_count sp_count no_clicks no_pointers"></td>
+				<td class="no_clicks no_pointers">Critical Chance:</td>
+				<td class="player_crit_chance no_clicks no_pointers"></td>
+			</tr>
+			<tr>
+				<td class="crit_mult_sp_cell sp_inactive no_clicks no_pointers">+</td>
+				<td class="crit_mult_sp_count sp_count no_clicks no_pointers"></td>
+				<td class="no_clicks no_pointers">Critical Multiplier:</td>
+				<td class="player_crit_mult no_clicks no_pointers"></td>
+			</tr>
+		</table>
 	</div>
-	<div class="enemy_container no_clicks"><div class="enemy_square"></div></div>
-	<div class="health_container no_clicks no_pointers"><div class="health_bar"></div></div>
+	<div class="enemy_divs_container no_clicks">
+		<div class="dmg_container no_clicks no_pointers">
+				<div class="dps_num_container no_clicks no_pointers"></div>
+				<div class="dmg_num_container no_clicks no_pointers"></div>
+		</div>
+		<div class="enemy_container no_clicks"><div class="enemy_square"></div></div>
+		<div class="health_container no_clicks no_pointers"><div class="health_bar"></div></div>
+		<div class="enemy_level no_clicks no_pointers"></div>
+	</div>
 </div>
 </body>
 

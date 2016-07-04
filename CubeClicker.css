@@ -1,10 +1,24 @@
 /* ======== MAIN & SHARED STYLES =========== */
 body {
 	background-color: lightgray;
+	font-family: Verdana, Geneva, sans-serif;
 }
 
 .main_container {
-	
+	margin: auto;
+	width: 600px;
+}
+
+.player_stats_container {
+	float: left;
+	width: 200px;
+	height: 300px;
+}
+
+.enemy_divs_container {
+	float: left;
+	width: 200px;
+	height: 300px;
 }
 
 .no_clicks {
@@ -19,6 +33,70 @@ body {
 	pointer-events: none;
 }
 
+/* ======== PLAYER INFO STYLES ========== */
+.player_stats_container {
+	width: 400px;
+}
+
+.player_level {
+	font-weight: bold;
+	font-size: 28px;
+	padding-bottom: 6px;
+}
+
+.player_exp_container {
+	position: relative;
+	top: 0px;
+	height: 20px;
+	width: 250px;
+	background-color: #669966;
+	border: 2px solid #555555;
+}
+
+.player_exp_text {
+	z-index: 1;
+	position: absolute;
+	height: 20px;
+	padding-left: 5px;
+	color: white;
+	font-weight: bold;
+	text-align: left;
+}
+
+.player_exp_bar {
+	z-index: 0;
+	position: absolute;
+	left: 0px;
+	height: 20px;
+	background-color: #33cc33;
+}
+
+.sp_count {
+	width: 12px;
+	text-align: center;
+	font-weight: bold;
+	color: #3399ff;
+}
+
+.sp_inactive {
+	text-align: center;
+	font-weight: bold;
+	font-size: 32;
+	background-color: #bbbbbb;
+	color: #999999;
+}
+
+.sp_active {
+	text-align: center;
+	font-weight: bold;
+	font-size: 32;
+	background-color: #4ce64c;
+	color: green;
+}
+
+td {
+	padding: 4px;
+}
 /* ======== DAMAGE NUMBER RELATED STYLES =========== */
 .dmg_container {
 	margin: auto;
@@ -34,6 +112,7 @@ body {
 	height: 100px;
 	text-align: center;
 }
+
 .dmg_num_container {
 	z-index: 5;
 	margin: auto;
@@ -42,12 +121,12 @@ body {
 	height: 100px;
 	text-align: center;
 }
+
 .dmg_nums {
 	margin: auto;
 	position: relative;
 	top: 75px;
 	width: 100px;
-	font-family: Verdana, Geneva, sans-serif;
 }
 
 .dps_nums {
@@ -59,24 +138,22 @@ body {
 
 /* === DAMAGE FONT STYLES === */
 .font_dps_dmg {
-	font-family: Verdana, Geneva, sans-serif;
 	font-size: 18px;
 	font-weight: bold;
 	color: gray;
 }
 
 .font_dmg {
-	font-family: Verdana, Geneva, sans-serif;
 	font-size: 18px;
 	font-weight: bold;
 	color: #cc6600;
 }
 
 .font_crit_dmg {
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: 18px;
+	font-size: 22px;
 	font-weight: bold;
-	color: #cc6600;
+	font-style: italic;
+	color: #cc3300;
 }
 
 /* ======== ENEMY RELATED STYLES =========== */
@@ -93,6 +170,16 @@ body {
 	width: 100px;
 	border: 2px solid black;
 }
+
+.enemy_level {
+	position: relative;
+	margin: auto;
+	top: 26px;    /* below health_container top */
+	text-align: center;
+	font-weight: bold;
+	color: #333333;
+}
+
 /* ======== HEALTH BAR RELATED STYLES =========== */
 .health_container {
 	margin: auto;
@@ -101,6 +188,7 @@ body {
 	height: 20px;
 	width: 150px;
 	background-color: gray;
+	border: 2px solid #555555;
 }
 
 .health_bar {
