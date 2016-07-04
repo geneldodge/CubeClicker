@@ -40,7 +40,6 @@ var expRewardCurrAmount = expRewardBaseAmount;
 // initialize other variables accordingly
 var dpsCurrAmount = 0; // initialize to zero
 var dpsTicking = false; // only starts ticking when dpsCurrAmount > 0
-var activeSP = false; // Skill points are not able to be used yet
 var expCurrAmount = 0;
 var expBarCurrWidth = 0;
 var expReqPrevAmount = 0;
@@ -242,7 +241,7 @@ function levelUp() {
 	$('.skill_point_count').text(skillPoints);
 	
 	// enable adding skill points to skills if not enabled
-	if (! activeSP) {
+	if (skillPoints == 1) {
 		toggleSP();
 	}
 	
@@ -265,8 +264,6 @@ function toggleSP() {
 	$('.crit_chance_sp_cell').toggleClass('sp_inactive sp_active no_pointers');
 	$('.crit_mult_sp_cell').toggleClass('sp_inactive sp_active no_pointers');
 	$('.skill_point_count').toggleClass('sp_inactive sp_active no_pointers');
-	// toggle the boolean
-	activeSP ? false : true;
 }
 
 // reset enemy and health bar attributes
