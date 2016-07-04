@@ -72,6 +72,12 @@ $(document).ready(function(){
 	$('.crit_chance_sp_cell').on("click", function() {addSP("critChance");});
 	$('.crit_mult_sp_cell').on("click", function() {addSP("critMult");});
 	
+	// attach tooltips to divs
+	$('.dmg_sp_cell .tooltiptext').text('Click to increase your Click Damage ' + dmgIncreaseMult + 'x.');
+	$('.dps_sp_cell .tooltiptext').text('Click to add ' + dpsIncrease + ' to your DPS Amount.');
+	$('.crit_chance_sp_cell .tooltiptext').text('Click to add ' + critChanceIncrease + ' to your Critical Chance.');
+	$('.crit_mult_sp_cell .tooltiptext').text('Click to add ' + critMultIncrease + ' to your Critical Multiplier.');
+	
 	// set up player divs
 	$(".player_level").text(playerLevel);
 	$(".player_exp_text").text("XP : " + expCurrAmount + "/" + expReqCurrAmount);
