@@ -127,15 +127,15 @@ function addSP(addToSkill) {
 			critChanceSP += 1;
 			$('.crit_chance_sp_count').text(critChanceSP);
 			// update crit chance amount
-			critChance += critChanceIncrease.toFixed(2);
-			$('.player_crit_chance').text(critChance);
+			critChance += critChanceIncrease;
+			$('.player_crit_chance').text(critChance.toFixed(2));
 		} else if (addToSkill == "critMult") {
 			// update SP count for crit multiplier
 			critMultSP += 1;
 			$('.crit_mult_sp_count').text(critMultSP);
 			// update crit multiplier amount
 			critMultiplier += critMultIncrease;
-			$('.player_crit_mult').text(critMultiplier);
+			$('.player_crit_mult').text(critMultiplier.toFixed(2));
 		}
 		
 		// subtract spent point
