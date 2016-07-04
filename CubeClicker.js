@@ -7,26 +7,28 @@ var dpsBaseAmount = 1;
 var dmgBaseAmount = 8;
 var critMultiplier = 2;
 var critChance = .05;
-var enemyBaseTotalHealth = 80;
-var healthBarTotalWidth = 145;
 var expReqBaseAmount = 43;
 var expRewardBaseAmount = 10;
-var expBarTotalWidth = 250;
-
-// amounts to increase stats by per level/point
-var critMultIncrease = .1;
-var critChanceIncrease = .05;
-var dpsIncrease = 5;
-var dmgIncreaseMult = 2;
-var enemyHealthIncreaseMult = 2;
-var expReqIncreaseConst = .02;
-var expRewardIncreaseMult = .5;
+var enemyBaseTotalHealth = 80;
+var healthBarTotalWidth = 150; // match to CSS value
+var expBarTotalWidth = 274; // match to CSS value
 
 // skillpoint numbers
 var dmgSP = 0;
 var dpsSP = 0;
 var critMultSP = 0;
 var critChanceSP = 0;
+
+// amounts to increase stats by per skill point
+var critMultIncrease = 0.1;
+var critChanceIncrease = 0.05;
+var dpsIncrease = 5;
+var dmgIncreaseMult = 2;
+
+// enemy related amounts for enemy levels
+var expReqIncreaseConst = 0.02;
+var expRewardIncreaseMult = 0.5;
+var enemyHealthIncreaseMult = 1.5;
 
 // initialize current values to base values
 var dmgCurrAmount = dmgBaseAmount;
@@ -71,7 +73,7 @@ $(document).ready(function(){
 	$('.crit_mult_sp_cell').on("click", function() {addSP("critMult");});
 	
 	// set up player divs
-	$(".player_level").text("LEVEL " + playerLevel);
+	$(".player_level").text(playerLevel);
 	$(".player_exp_text").text("XP : " + expCurrAmount + "/" + expReqCurrAmount);
 	$(".player_dmg").text(formatNum(dmgBaseAmount));
 	$(".player_dps").text(formatNum(dpsCurrAmount));
@@ -99,7 +101,7 @@ function addSP(addToSkill) {
 			// update damage amount
 			dmgBaseAmount = dmgBaseAmount * dmgIncreaseMult;
 			dmgCurrAmount = dmgBaseAmount;
-			$('.player_dmg').text(dmgCurrAmount);
+			$('.player_dmg').text(formatNum(dmgCurrAmount));
 		} else if (addToSkill == "dps") {
 			// update SP count for dps
 			dpsSP += 1;
@@ -160,7 +162,10 @@ function dealDamage(damageToDeal) {
 		// subtract dmg from health
 		enemyCurrHealth -= damageToDeal;
 		// change health_bar text
-		$('.health_bar').text(enemyCurrHealth);
+		if ((enemyCurrHealth % 1) != 0) {
+			enemyCurrHealth = enemyCurrHealth.toFixed(1);
+		}
+		$('.health_bar_text').text(enemyCurrHealth);
 		// calculate new health_bar width
 		var subWidth = Math.floor((healthBarTotalWidth / enemyBaseTotalHealth) * damageToDeal);
 		// change health_bar width
@@ -179,7 +184,8 @@ function enemyDeath() {
 	// toggle bool to stop dps ticks
 	dpsTicking = false;
 	// clear enemy health bar numbers and make it clear for now
-	$('.health_bar').text('').css({opacity: '0.0'});
+	$('.health_bar_text').text('').css({opacity: '0.0'});
+	$('.health_bar').css({opacity: '0.0'});
 	// animate enemy disappearing
 	$('.enemy_square').css({pointerEvents: 'none'}).animate({height: '0px', width: '0px', top: '50px', opacity: '0.0'}, function(){
 		// make enemy unclickable
@@ -236,7 +242,7 @@ function levelUp() {
 	
 	// change playerLevel
 	playerLevel += 1;
-	$('.player_level').text("LEVEL " + playerLevel);
+	$('.player_level').text(playerLevel);
 	
 	// change expReqCurrAmount based on NEW playerLevel
 	expReqPrevAmount = expReqCurrAmount;
@@ -264,13 +270,14 @@ function resetEnemy() {
 	healthBarCurrWidth = healthBarTotalWidth;
 	
 	// reset bar properties and text
-	$('.health_bar').text(enemyCurrHealth).css({width: healthBarCurrWidth, opacity: '1.0'});
+	$('.health_bar_text').text(enemyCurrHealth).css({opacity: '1.0'});
+	$('.health_bar').css({width: healthBarCurrWidth, opacity: '1.0'});
 	
 	// reset enemy_square stuff
 	$('.enemy_square').css({height: '100px', width: '100px', top: '0px', opacity: '1.0', pointerEvents: 'auto', backgroundColor: getRandHexColor()});
 	
 	// populate the enemies level
-	$('.enemy_level').text("LEVEL " + enemyLevel + " SQUARE");
+	$('.enemy_level_num').text(enemyLevel);
 	
 	// set dps ticking again if dps > 0
 	if (dpsCurrAmount > 0) {

@@ -1,24 +1,44 @@
 /* ======== MAIN & SHARED STYLES =========== */
 body {
-	background-color: lightgray;
+	padding-top: 20px;
+	background-color: #eeeeee;
 	font-family: Verdana, Geneva, sans-serif;
 }
 
 .main_container {
 	margin: auto;
-	width: 600px;
+	width: 620px;
+	height: 320px;
+	background-color: #dddddd;
+	border: 4px solid #aaaaaa;
+	border-radius: 6px;
 }
 
 .player_stats_container {
 	float: left;
-	width: 200px;
+	padding: 10px 8px 6px 16px;
+	width: 286px;
 	height: 300px;
 }
 
 .enemy_divs_container {
 	float: left;
-	width: 200px;
-	height: 300px;
+	padding: 8px;
+	width: 290px;
+	height: 304px;
+	border-left: 4px solid #aaaaaa;
+	background-color: #cccccc;
+}
+
+.areas_container {
+	margin: auto;
+	position: relative;
+	top: 20px;
+	width: 620px;
+	height: 100px;
+	background-color: #dddddd;
+	border: 4px solid #aaaaaa;
+	border-radius: 6px;
 }
 
 .no_clicks {
@@ -35,20 +55,30 @@ body {
 
 /* ======== PLAYER INFO STYLES ========== */
 .player_stats_container {
-	width: 400px;
+	
 }
-
-.player_level {
+.player_level_container {
+	position: relative;
 	font-weight: bold;
 	font-size: 28px;
 	padding-bottom: 6px;
 }
+.player_level_prefix {
+	float: left;
+	width: 75px;
+	color: #888888;
+}
+.player_level {
+	float: left;
+	width: 200px;
+	text-align: right;
+}
 
 .player_exp_container {
 	position: relative;
-	top: 0px;
+	top: 32px;
 	height: 20px;
-	width: 250px;
+	width: 274px;
 	background-color: #669966;
 	border: 2px solid #555555;
 }
@@ -71,22 +101,30 @@ body {
 	background-color: #33cc33;
 }
 
+.player_sp_container {
+	position: relative;
+	top: 50px;
+}
+
 .sp_count {
-	width: 12px;
 	text-align: center;
 	font-weight: bold;
 	color: #3399ff;
+	border-width: 0px 2px 0px 2px;
+	border-color: #888888;
+	border-style: solid;
 }
 
 .sp_inactive {
 	text-align: center;
 	font-weight: bold;
 	font-size: 32;
-	background-color: #bbbbbb;
-	color: #999999;
+	background-color: #cccccc;
+	color: #bbbbbb;
 }
 
 .sp_active {
+	cursor: pointer;
 	text-align: center;
 	font-weight: bold;
 	font-size: 32;
@@ -94,8 +132,13 @@ body {
 	color: green;
 }
 
+.stat_cell {
+	font-weight: bold;
+	text-align: right;
+}
+
 td {
-	padding: 4px;
+	padding: 10px 6px 10px 6px;
 }
 /* ======== DAMAGE NUMBER RELATED STYLES =========== */
 .dmg_container {
@@ -108,7 +151,7 @@ td {
 	z-index: 4;
 	margin: auto;
 	position: absolute;
-	top: 0px;
+	top: 33px; /* margin of BODY + border-width of main_container & padding of enemy_divs_container*/
 	height: 100px;
 	text-align: center;
 }
@@ -117,7 +160,7 @@ td {
 	z-index: 5;
 	margin: auto;
 	position: absolute;
-	top: 0px;
+	top: 33px; /* margin of BODY + border-width of main_container & padding of enemy_divs_container*/
 	height: 100px;
 	text-align: center;
 }
@@ -164,6 +207,7 @@ td {
 }
 
 .enemy_square {
+	cursor: pointer;
 	position: relative;
 	margin: auto;
 	height: 100px;
@@ -171,13 +215,29 @@ td {
 	border: 2px solid black;
 }
 
-.enemy_level {
+.enemy_level_container {
 	position: relative;
 	margin: auto;
-	top: 26px;    /* below health_container top */
-	text-align: center;
+	top: 40px;    /* below health_container top */
+	width: 274px;
 	font-weight: bold;
 	color: #333333;
+}
+
+.enemy_level_text {
+	float: left;
+}
+
+.enemy_level_num {
+	float: left;
+	padding-left: 4px;
+	text-align: right;
+}
+
+.enemy_type {
+	float: left;
+	padding-left: 4px;
+	text-align: left;
 }
 
 /* ======== HEALTH BAR RELATED STYLES =========== */
@@ -190,15 +250,22 @@ td {
 	background-color: gray;
 	border: 2px solid #555555;
 }
-
-.health_bar {
+.health_bar_text {
+	z-index: 1;
 	position: absolute;
 	right: 0px;
-	height: 20px;
 	width: 145px;
 	padding-right: 5px;
-	background-color: darkred;
 	color: white;
 	font-weight: bold;
 	text-align: right;
+}
+
+.health_bar {
+	z-index: 0;
+	position: absolute;
+	right: 0px;
+	height: 20px;
+	width: 150px;
+	background-color: darkred;
 }
