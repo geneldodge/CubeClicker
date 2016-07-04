@@ -4,6 +4,8 @@ A simple clicker game made with jquery and html only
 # Try It Out
 Download via the link, unzip, and open the ".html" file.
 
+# Feature To-Do
+
 ##TOOLTIP FEATURE
 - [ ] Tooltips available for features
  - [x] Tooltips for each skill
