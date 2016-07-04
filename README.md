@@ -2,7 +2,7 @@
 A simple clicker game made with jquery and html only
 
 # Try It Out
-Download via the link, unzip, and open the ".html" file.
+Download via the "Clone or Download" link, unzip, and open the ".html" file.
 
 # Feature To-Do
 
