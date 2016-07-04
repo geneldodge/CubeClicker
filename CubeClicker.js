@@ -306,7 +306,7 @@ function showDamageDone() {
 	$('.dmg_num_container').append(newDmgDiv);
 	
 	// animate div
-	newDmgDiv.text(formatNum(dmgCurrAmount)).animate({top: '0px', opacity: '0.5'}, "slow", function(){$(this).remove();});
+	newDmgDiv.text(formatNum(dmgCurrAmount)).animate({top: '0px', left: '30px', opacity: '0.5'}, "slow", function(){$(this).remove();});
 }
 
 // creates a dps_nums div and animates it every 1 second
@@ -321,7 +321,7 @@ function tickDps() {
 		$(".dps_num_container").append(newDpsDiv);
 		
 		// animate div
-		newDpsDiv.text(formatNum(dpsCurrAmount / (1000 / dpsTickFrequency))).animate({top: '0px', opacity: '0.5'}, "slow", function(){$(this).remove();});
+		newDpsDiv.text(formatNum(dpsCurrAmount / (1000 / dpsTickFrequency))).animate({top: '0px', right: '30px', opacity: '0.5'}, "slow", function(){$(this).remove();});
 		
 		// make changes to health bar
 		dealDamage(dpsCurrAmount / (1000 / dpsTickFrequency));
