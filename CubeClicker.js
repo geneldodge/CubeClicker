@@ -38,6 +38,7 @@ var expReqCurrAmount = expReqBaseAmount;
 var expRewardCurrAmount = expRewardBaseAmount;
 
 // initialize other variables accordingly
+var dpsTickFrequency = 200; // ms for between dps ticks
 var dpsCurrAmount = 0; // initialize to zero
 var dpsTicking = false; // only starts ticking when dpsCurrAmount > 0
 var expCurrAmount = 0;
@@ -126,7 +127,7 @@ function addSP(addToSkill) {
 			critChanceSP += 1;
 			$('.crit_chance_sp_count').text(critChanceSP);
 			// update crit chance amount
-			critChance += critChanceIncrease;
+			critChance += critChanceIncrease.toFixed(2);
 			$('.player_crit_chance').text(critChance);
 		} else if (addToSkill == "critMult") {
 			// update SP count for crit multiplier
@@ -192,9 +193,9 @@ function enemyDeath() {
 	$('.health_bar_text').text('').css({opacity: '0.0'});
 	$('.health_bar').css({opacity: '0.0'});
 	// animate enemy disappearing
-	$('.enemy_square').css({pointerEvents: 'none'}).animate({height: '0px', width: '0px', top: '50px', opacity: '0.0'}, function(){
+	$('.enemy_square').css({pointerEvents: 'none'}).animate({height: '0px', width: '0px', top: '50px', opacity: '0.0'}, "fast",function(){
 		// make enemy unclickable
-		setTimeout(resetEnemy, 200);
+		setTimeout(resetEnemy, 100);
 	});
 	
 	// calculate xp reward
@@ -320,14 +321,14 @@ function tickDps() {
 		$(".dps_num_container").append(newDpsDiv);
 		
 		// animate div
-		newDpsDiv.text(formatNum(dpsCurrAmount)).animate({top: '0px', opacity: '0.5'}, "slow", function(){$(this).remove();});
+		newDpsDiv.text(formatNum(dpsCurrAmount / (1000 / dpsTickFrequency))).animate({top: '0px', opacity: '0.5'}, "slow", function(){$(this).remove();});
 		
 		// make changes to health bar
-		dealDamage(dpsCurrAmount);
+		dealDamage(dpsCurrAmount / (1000 / dpsTickFrequency));
 	}
 	
 		// repeat in 1 second
-		dpsTimer = setTimeout(tickDps, 1000);
+		dpsTimer = setTimeout(tickDps, dpsTickFrequency);
 }
 
 // returns a random six digit hex color value for the enemy
