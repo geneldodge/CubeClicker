@@ -86,6 +86,9 @@ $(document).ready(function(){
 	$(".player_crit_mult").text(critMultiplier);
 	$(".player_crit_chance").text(critChance);
 	
+	// generate areas selection list
+	generateAreaList();
+	
 	// set initial enemy square
 	resetEnemy();
 	

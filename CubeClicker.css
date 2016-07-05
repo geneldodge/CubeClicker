@@ -1,7 +1,7 @@
 /* ======== MAIN & SHARED STYLES =========== */
 body {
 	padding-top: 20px;
-	background-color: #eeeeee;
+	background-color: #eeeedd;
 	font-family: Verdana, Geneva, sans-serif;
 }
 
@@ -30,12 +30,12 @@ body {
 	background-color: #cccccc;
 }
 
-.areas_container {
+.area_container {
 	margin: auto;
 	position: relative;
 	top: 20px;
 	width: 620px;
-	height: 100px;
+	height: 80px;
 	background-color: #dddddd;
 	border: 4px solid #aaaaaa;
 	border-radius: 6px;
@@ -92,17 +92,20 @@ body {
 .player_stats_container {
 	
 }
+
 .player_level_container {
 	position: relative;
 	font-weight: bold;
 	font-size: 28px;
 	padding-bottom: 6px;
 }
+
 .player_level_prefix {
 	float: left;
 	width: 75px;
 	color: #888888;
 }
+
 .player_level {
 	float: left;
 	width: 200px;
