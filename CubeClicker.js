@@ -218,6 +218,8 @@ function awardXP() {
 		levelUp();
 	} else {
 		// calculate new XP bar width and apply it
+		//  calculates what percentage of current required XP has been accumulated MINUS the prev level amount so that the
+		//    XP bar can reset to empty at each level
 		var newWidth = Math.floor(expBarTotalWidth * ((expCurrAmount - expReqPrevAmount) / (expReqCurrAmount - expReqPrevAmount)));
 		
 		// add the width to current xp
@@ -252,6 +254,13 @@ function levelUp() {
 	
 	// reset expBarCurrWidth
 	expBarCurrWidth = 0;
+	
+	// check if another level should be added
+	//  *there is a possibility of player getting > 1 level's worth of XP from some battles
+	if (expCurrAmount >= expReqCurrAmount) {
+		// level up again
+		levelUp();
+	}
 }
 
 // enables or disable SP buttons
