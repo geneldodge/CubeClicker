@@ -6,12 +6,12 @@ var skillPoints = 0;
 var dpsBaseAmount = 1;
 var dmgBaseAmount = 8;
 var critMultiplier = 2;
-var critChance = .05;
+var critChance = 1.00;
 var expReqBaseAmount = 43;
 var expRewardBaseAmount = 10;
 var enemyBaseTotalHealth = 80;
 var healthBarTotalWidth = 150; // match to CSS value
-var expBarTotalWidth = 274; // match to CSS value
+var expBarTotalWidth = 394; // match to CSS value
 
 // skillpoint numbers
 var dmgSP = 0;
@@ -19,10 +19,10 @@ var dpsSP = 0;
 var critMultSP = 0;
 var critChanceSP = 0;
 
-// amounts to increase stats by per skill point
+// amounts used for equations that increase stats by per skill point
 var critMultIncrease = 0.1;
-var critChanceIncrease = 0.05;
-var dpsIncrease = 5;
+var critChanceIncreaseMult = 10;
+var dpsIncrease = 4;
 var dmgIncreaseMult = 2;
 
 // enemy related amounts for enemy levels
@@ -75,15 +75,15 @@ $(document).ready(function(){
 	// attach tooltips to divs
 	$('.dmg_sp_cell .tooltiptext').text('Click to increase your Click Damage ' + dmgIncreaseMult + 'x.');
 	$('.dps_sp_cell .tooltiptext').text('Click to add ' + dpsIncrease + ' to your DPS Amount.');
-	$('.crit_chance_sp_cell .tooltiptext').text('Click to add ' + critChanceIncrease + ' to your Critical Chance.');
+	$('.crit_chance_sp_cell .tooltiptext').text('Click to add to your Critical Chance.');
 	$('.crit_mult_sp_cell .tooltiptext').text('Click to add ' + critMultIncrease + ' to your Critical Multiplier.');
 	
 	// set up player divs
 	$(".player_level").text(playerLevel);
-	$(".player_exp_text").text("XP : " + expCurrAmount + "/" + expReqCurrAmount);
-	$(".player_dmg").text(formatNum(dmgBaseAmount));
-	$(".player_dps").text(formatNum(dpsCurrAmount));
-	$(".player_crit_mult").text(critMultiplier);
+	$(".player_exp_text").text("XP : " + formatNum(expCurrAmount,3) + "/" + formatNum(expReqCurrAmount,3));
+	$(".player_dmg").text(formatNum(dmgBaseAmount,1));
+	$(".player_dps").text(formatNum(dpsCurrAmount,1));
+	$(".player_crit_mult").text(formatNum(critMultiplier,2));
 	$(".player_crit_chance").text(critChance);
 	
 	// set initial enemy square
@@ -103,15 +103,15 @@ function addSP(addToSkill) {
 		if (addToSkill == "dmg") {
 			// update SP count for dmg
 			dmgSP += 1;
-			$('.dmg_sp_count').text(dmgSP);
+			$('.dmg_sp_count').text(formatNum(dmgSP,1));
 			// update damage amount
 			dmgBaseAmount = dmgBaseAmount * dmgIncreaseMult;
 			dmgCurrAmount = dmgBaseAmount;
-			$('.player_dmg').text(formatNum(dmgCurrAmount));
+			$('.player_dmg').text(formatNum(dmgCurrAmount,1));
 		} else if (addToSkill == "dps") {
 			// update SP count for dps
 			dpsSP += 1;
-			$('.dps_sp_count').text(dpsSP);
+			$('.dps_sp_count').text(formatNum(dpsSP,1));
 			
 			// special case if DPS is zero
 			if (dpsCurrAmount == 0) {
@@ -120,27 +120,30 @@ function addSP(addToSkill) {
 			
 			// update dps amount
 			dpsCurrAmount += dpsIncrease;
-			$('.player_dps').text(dpsCurrAmount);
+			$('.player_dps').text(formatNum(dpsCurrAmount,1));
 			
 		} else if (addToSkill == "critChance") {
-			// update SP count for crit chance
-			critChanceSP += 1;
-			$('.crit_chance_sp_count').text(critChanceSP);
-			// update crit chance amount
-			critChance += critChanceIncrease;
-			$('.player_crit_chance').text(critChance.toFixed(2));
+			// only update if critChance < 100%
+			if (critChance <= 100) {
+				// update SP count for crit chance
+				critChanceSP += 1;
+				$('.crit_chance_sp_count').text(formatNum(critChanceSP,1));
+				// update crit chance amount if it is not 100
+				critChance = Math.sqrt(critChanceSP * critChanceIncreaseMult);
+				$('.player_crit_chance').text(critChance.toFixed(2));
+			}
 		} else if (addToSkill == "critMult") {
 			// update SP count for crit multiplier
 			critMultSP += 1;
-			$('.crit_mult_sp_count').text(critMultSP);
-			// update crit multiplier amount
-			critMultiplier += critMultIncrease;
-			$('.player_crit_mult').text(critMultiplier.toFixed(2));
+			$('.crit_mult_sp_count').text(formatNum(critMultSP,1));
+			// update crit multiplier amount, rounding to 3 decimal places
+			critMultiplier = Math.round((critMultiplier + critMultIncrease) * 1000) / 1000;
+			$('.player_crit_mult').text(formatNum(critMultiplier,2));
 		}
 		
 		// subtract spent point
 		skillPoints -= 1;
-		$('.skill_point_count').text(skillPoints);
+		$('.skill_point_count').text(formatNum(skillPoints,1));
 		// toggle off skill point adders if necessary
 		if (skillPoints <= 0) {
 			toggleSP(); // toggle off 
@@ -152,7 +155,7 @@ function addSP(addToSkill) {
 function checkCrit() {
 	var criticalHit = false;
 	
-	if (Math.random() > (1 - critChance)){
+	if (Math.random() > (1 - (critChance / 100))){
 		criticalHit = true;
 	}
 	
@@ -171,7 +174,7 @@ function dealDamage(damageToDeal) {
 		if ((enemyCurrHealth % 1) != 0) {
 			enemyCurrHealth = enemyCurrHealth.toFixed(1);
 		}
-		$('.health_bar_text').text(enemyCurrHealth);
+		$('.health_bar_text').text(formatNum(enemyCurrHealth,2));
 		// calculate new health_bar width
 		var subWidth = Math.floor((healthBarTotalWidth / enemyBaseTotalHealth) * damageToDeal);
 		// change health_bar width
@@ -217,19 +220,17 @@ function awardXP() {
 		// level player up
 		levelUp();
 	} else {
-		// calculate new XP bar width
-		var addWidth = Math.floor((expBarTotalWidth / (expReqCurrAmount - expReqPrevAmount)) * expRewardCurrAmount);
-		
-		if (addWidth <= 0) {
-			addWidth = 1; // 1px is smallest amount to increase
-		}
+		// calculate new XP bar width and apply it
+		//  calculates what percentage of current required XP has been accumulated MINUS the prev level amount so that the
+		//    XP bar can reset to empty at each level
+		var newWidth = Math.floor(expBarTotalWidth * ((expCurrAmount - expReqPrevAmount) / (expReqCurrAmount - expReqPrevAmount)));
 		
 		// add the width to current xp
-		expBarCurrWidth += addWidth;
+		expBarCurrWidth = newWidth;
 	}
 	
 	// change total
-	$('.player_exp_text').text("XP : " + expCurrAmount + " / " + expReqCurrAmount);
+	$('.player_exp_text').text("XP : " + formatNum(expCurrAmount,3) + " / " + formatNum(expReqCurrAmount,3));
 	
 	// adjust fill bar
 	$('.player_exp_bar').css({width: expBarCurrWidth});
@@ -239,7 +240,7 @@ function awardXP() {
 function levelUp() {
 	// add skill point
 	skillPoints += 1;
-	$('.skill_point_count').text(skillPoints);
+	$('.skill_point_count').text(formatNum(skillPoints,1));
 	
 	// enable adding skill points to skills if not enabled
 	if (skillPoints == 1) {
@@ -256,6 +257,13 @@ function levelUp() {
 	
 	// reset expBarCurrWidth
 	expBarCurrWidth = 0;
+	
+	// check if another level should be added
+	//  *there is a possibility of player getting > 1 level's worth of XP from some battles
+	if (expCurrAmount >= expReqCurrAmount) {
+		// level up again
+		levelUp();
+	}
 }
 
 // enables or disable SP buttons
@@ -274,7 +282,7 @@ function resetEnemy() {
 	healthBarCurrWidth = healthBarTotalWidth;
 	
 	// reset bar properties and text
-	$('.health_bar_text').text(enemyCurrHealth).css({opacity: '1.0'});
+	$('.health_bar_text').text(formatNum(enemyCurrHealth,2)).css({opacity: '1.0'});
 	$('.health_bar').css({width: healthBarCurrWidth, opacity: '1.0'});
 	
 	// reset enemy_square stuff
@@ -306,7 +314,7 @@ function showDamageDone() {
 	$('.dmg_num_container').append(newDmgDiv);
 	
 	// animate div
-	newDmgDiv.text(formatNum(dmgCurrAmount)).animate({top: '0px', left: getRandInt(25,40) + 'px', opacity: '0.5'}, "slow", function(){$(this).remove();});
+	newDmgDiv.text(formatNum(dmgCurrAmount,1)).animate({top: '0px', left: getRandInt(25,40) + 'px', opacity: '0.5'}, "slow", function(){$(this).remove();});
 }
 
 // creates a dps_nums div and animates it every 1 second
@@ -321,7 +329,7 @@ function tickDps() {
 		$(".dps_num_container").append(newDpsDiv);
 		
 		// animate div
-		newDpsDiv.text(formatNum(dpsCurrAmount / (1000 / dpsTickFrequency))).animate({top: '0px', right: getRandInt(25,40) + 'px', opacity: '0.5'}, "slow", function(){$(this).remove();});
+		newDpsDiv.text(formatNum((dpsCurrAmount / (1000 / dpsTickFrequency)),1)).animate({top: '0px', right: getRandInt(25,40) + 'px', opacity: '0.5'}, "slow", function(){$(this).remove();});
 		
 		// make changes to health bar
 		dealDamage(dpsCurrAmount / (1000 / dpsTickFrequency));
@@ -342,23 +350,28 @@ function getRandHexColor() {
 //   truncates large numbers and appends a character
 //     ie. 1000 becomes "1K"
 //         1000000 becomes "1M"
-//  NOTE: largest val javascript can handle:
-//          9,007,199,254,740,991 (~9 Quadrillion)
-function formatNum(number) {
+//  NOTE: once number >= 10e+21, goes to scientific notation
+function formatNum(number, fixedAmount) {
 	var returnNumString;
 	
-	if (number > 999999999999999999) {
-		returnNumString = (number / 1000000000000000000).toFixed(1) + "Q";
+	if (number > 999999999999999999999999999) {
+		returnNumString = (number / 1000000000000000000000000).toPrecision(3);
+	} else if (number > 999999999999999999999999) {
+		returnNumString = (number / 1000000000000000000000000).toFixed(fixedAmount) + "S";
+	} else if (number > 999999999999999999999) {
+		returnNumString = (number / 1000000000000000000000).toFixed(fixedAmount) + "s";
+	} else if (number > 999999999999999999) {
+		returnNumString = (number / 1000000000000000000).toFixed(fixedAmount) + "Q";
 	} else if (number > 999999999999999) {
-		returnNumString = (number / 1000000000000000).toFixed(1) + "q";
+		returnNumString = (number / 1000000000000000).toFixed(fixedAmount) + "q";
 	} else if (number > 999999999999) {
-		returnNumString = (number / 1000000000000).toFixed(1) + "T";
+		returnNumString = (number / 1000000000000).toFixed(fixedAmount) + "T";
 	} else if (number > 999999999) {
-		returnNumString = (number / 1000000000).toFixed(1) + "B";
+		returnNumString = (number / 1000000000).toFixed(fixedAmount) + "B";
 	} else if (number > 999999) {
-		returnNumString = (number / 1000000).toFixed(1) + "M";
+		returnNumString = (number / 1000000).toFixed(fixedAmount) + "M";
 	} else if (number > 999) {
-		returnNumString = (number / 1000).toFixed(1) + "K";
+		returnNumString = (number / 1000).toFixed(fixedAmount) + "K";
 	} else {
 		returnNumString = number;
 	}
