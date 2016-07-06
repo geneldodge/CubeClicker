@@ -217,15 +217,11 @@ function awardXP() {
 		// level player up
 		levelUp();
 	} else {
-		// calculate new XP bar width
-		var addWidth = Math.floor((expBarTotalWidth / (expReqCurrAmount - expReqPrevAmount)) * expRewardCurrAmount);
-		
-		if (addWidth <= 0) {
-			addWidth = 1; // 1px is smallest amount to increase
-		}
+		// calculate new XP bar width and apply it
+		var newWidth = Math.floor(expBarTotalWidth * ((expCurrAmount - expReqPrevAmount) / (expReqCurrAmount - expReqPrevAmount)));
 		
 		// add the width to current xp
-		expBarCurrWidth += addWidth;
+		expBarCurrWidth = newWidth;
 	}
 	
 	// change total
