@@ -11,7 +11,7 @@ var expReqBaseAmount = 43;
 var expRewardBaseAmount = 10;
 var enemyBaseTotalHealth = 80;
 var healthBarTotalWidth = 150; // match to CSS value
-var expBarTotalWidth = 274; // match to CSS value
+var expBarTotalWidth = 394; // match to CSS value
 
 // skillpoint numbers
 var dmgSP = 0;
@@ -103,7 +103,7 @@ function addSP(addToSkill) {
 		if (addToSkill == "dmg") {
 			// update SP count for dmg
 			dmgSP += 1;
-			$('.dmg_sp_count').text(dmgSP);
+			$('.dmg_sp_count').text(formatNum(dmgSP,1));
 			// update damage amount
 			dmgBaseAmount = dmgBaseAmount * dmgIncreaseMult;
 			dmgCurrAmount = dmgBaseAmount;
@@ -111,7 +111,7 @@ function addSP(addToSkill) {
 		} else if (addToSkill == "dps") {
 			// update SP count for dps
 			dpsSP += 1;
-			$('.dps_sp_count').text(dpsSP);
+			$('.dps_sp_count').text(formatNum(dpsSP,1));
 			
 			// special case if DPS is zero
 			if (dpsCurrAmount == 0) {
@@ -127,7 +127,7 @@ function addSP(addToSkill) {
 			if (critChance <= 100) {
 				// update SP count for crit chance
 				critChanceSP += 1;
-				$('.crit_chance_sp_count').text(critChanceSP);
+				$('.crit_chance_sp_count').text(formatNum(critChanceSP,1));
 				// update crit chance amount if it is not 100
 				critChance = Math.sqrt(critChanceSP * critChanceIncreaseMult);
 				$('.player_crit_chance').text(critChance.toFixed(2));
@@ -135,7 +135,7 @@ function addSP(addToSkill) {
 		} else if (addToSkill == "critMult") {
 			// update SP count for crit multiplier
 			critMultSP += 1;
-			$('.crit_mult_sp_count').text(critMultSP);
+			$('.crit_mult_sp_count').text(formatNum(critMultSP,1));
 			// update crit multiplier amount, rounding to 3 decimal places
 			critMultiplier = Math.round((critMultiplier + critMultIncrease) * 1000) / 1000;
 			$('.player_crit_mult').text(formatNum(critMultiplier,2));
