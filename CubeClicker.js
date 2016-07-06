@@ -6,7 +6,7 @@ var skillPoints = 0;
 var dpsBaseAmount = 1;
 var dmgBaseAmount = 8;
 var critMultiplier = 2;
-var critChance = .05;
+var critChance = 1.00;
 var expReqBaseAmount = 43;
 var expRewardBaseAmount = 10;
 var enemyBaseTotalHealth = 80;
@@ -19,9 +19,9 @@ var dpsSP = 0;
 var critMultSP = 0;
 var critChanceSP = 0;
 
-// amounts to increase stats by per skill point
+// amounts used for equations that increase stats by per skill point
 var critMultIncrease = 0.1;
-var critChanceIncrease = 0.05;
+var critChanceIncreaseMult = 10;
 var dpsIncrease = 4;
 var dmgIncreaseMult = 2;
 
@@ -75,7 +75,7 @@ $(document).ready(function(){
 	// attach tooltips to divs
 	$('.dmg_sp_cell .tooltiptext').text('Click to increase your Click Damage ' + dmgIncreaseMult + 'x.');
 	$('.dps_sp_cell .tooltiptext').text('Click to add ' + dpsIncrease + ' to your DPS Amount.');
-	$('.crit_chance_sp_cell .tooltiptext').text('Click to add ' + critChanceIncrease + ' to your Critical Chance.');
+	$('.crit_chance_sp_cell .tooltiptext').text('Click to add to your Critical Chance.');
 	$('.crit_mult_sp_cell .tooltiptext').text('Click to add ' + critMultIncrease + ' to your Critical Multiplier.');
 	
 	// set up player divs
@@ -123,12 +123,15 @@ function addSP(addToSkill) {
 			$('.player_dps').text(formatNum(dpsCurrAmount,1));
 			
 		} else if (addToSkill == "critChance") {
-			// update SP count for crit chance
-			critChanceSP += 1;
-			$('.crit_chance_sp_count').text(critChanceSP);
-			// update crit chance amount
-			critChance += critChanceIncrease;
-			$('.player_crit_chance').text(critChance.toFixed(2));
+			// only update if critChance < 100%
+			if (critChance <= 100) {
+				// update SP count for crit chance
+				critChanceSP += 1;
+				$('.crit_chance_sp_count').text(critChanceSP);
+				// update crit chance amount if it is not 100
+				critChance = Math.sqrt(critChanceSP * critChanceIncreaseMult);
+				$('.player_crit_chance').text(critChance.toFixed(2));
+			}
 		} else if (addToSkill == "critMult") {
 			// update SP count for crit multiplier
 			critMultSP += 1;
@@ -152,7 +155,7 @@ function addSP(addToSkill) {
 function checkCrit() {
 	var criticalHit = false;
 	
-	if (Math.random() > (1 - critChance)){
+	if (Math.random() > (1 - (critChance / 100))){
 		criticalHit = true;
 	}
 	
