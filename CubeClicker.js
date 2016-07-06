@@ -22,7 +22,7 @@ var critChanceSP = 0;
 // amounts to increase stats by per skill point
 var critMultIncrease = 0.1;
 var critChanceIncrease = 0.05;
-var dpsIncrease = 5;
+var dpsIncrease = 4;
 var dmgIncreaseMult = 2;
 
 // enemy related amounts for enemy levels
@@ -133,9 +133,9 @@ function addSP(addToSkill) {
 			// update SP count for crit multiplier
 			critMultSP += 1;
 			$('.crit_mult_sp_count').text(critMultSP);
-			// update crit multiplier amount
-			critMultiplier += critMultIncrease;
-			$('.player_crit_mult').text(fixedAmount(critMultiplier,2));
+			// update crit multiplier amount, rounding to 3 decimal places
+			critMultiplier = Math.round((critMultiplier + critMultIncrease) * 1000) / 1000;
+			$('.player_crit_mult').text(formatNum(critMultiplier,2));
 		}
 		
 		// subtract spent point
