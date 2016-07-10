@@ -109,16 +109,25 @@ $(document).ready(function(){
 	$(".player_crit_mult").text(formatNum(critMultiplier,2));
 	$(".player_crit_chance").text(critChance);
 	
-	// set up version notes and thanks
+	// set up version and licensing stuff
 	$('.version_notes_link').on("click", function() {
 		$('.version_notes_container').toggle();
+	});
+	
+	$('.license_link').on("click", function() {
+		$('.license_link_container').toggle();
 	});
 	
 	$('.version_notes_container').on("click", function() {
 		$(this).toggle();
 	});
 	
+	$('.license_link_container').on("click", function() {
+		$(this).toggle();
+	});
+	
 	$('.version_notes_container').toggle(); // initially hide the thanks
+	$('.license_link_container').toggle();
 	
 	// generate areas selection list
 	generateAreaList(numAreasToGenerate);
