@@ -30,10 +30,32 @@ body {
 	background-color: #cccccc;
 }
 
+.version_license_container {
+	margin: auto;
+	width: 740px;
+	font-size: 10px;
+	color: #777777;
+	text-align: right;
+}
+
+.version {
+	float: left;
+	text-align: left;
+	width: 50%;
+}
+
+.license {
+	float: left;
+	text-align: right;
+	width: 50%;
+}
+
+.license a:link, .license a:visited, .license a:hover, .license a:active {
+	text-decoration: none;
+}
+
 .area_container {
 	margin: auto;
-	position: relative;
-	top: 20px;
 	width: 740px;
 	background-color: #91e467;
 	border: 4px solid #aaaaaa;
