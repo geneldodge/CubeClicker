@@ -109,6 +109,17 @@ $(document).ready(function(){
 	$(".player_crit_mult").text(formatNum(critMultiplier,2));
 	$(".player_crit_chance").text(critChance);
 	
+	// set up version notes and thanks
+	$('.version_notes_link').on("click", function() {
+		$('.version_notes_container').toggle();
+	});
+	
+	$('.version_notes_container').on("click", function() {
+		$(this).toggle();
+	});
+	
+	$('.version_notes_container').toggle(); // initially hide the thanks
+	
 	// generate areas selection list
 	generateAreaList(numAreasToGenerate);
 	
