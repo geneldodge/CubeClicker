@@ -1,0 +1,375 @@
+/* ======== MAIN & SHARED STYLES =========== */
+body {
+	padding-top: 20px;
+	background-color: #eeeedd;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.main_container {
+	margin: auto;
+	width: 740px;
+	height: 320px;
+	background-color: #dddddd;
+	border: 4px solid #aaaaaa;
+	border-radius: 6px;
+}
+
+.player_stats_container {
+	float: left;
+	padding: 10px 8px 6px 16px;
+	width: 406px;
+	height: 300px;
+}
+
+.enemy_divs_container {
+	float: left;
+	padding: 8px;
+	width: 290px;
+	height: 304px;
+	border-left: 4px solid #aaaaaa;
+	background-color: #cccccc;
+}
+
+.version_license_container {
+	margin: auto;
+	width: 740px;
+	font-size: 10px;
+	color: #777777;
+	text-align: right;
+}
+
+.version {
+	float: left;
+	text-align: left;
+	width: 50%;
+}
+
+.license {
+	float: left;
+	text-align: right;
+	width: 50%;
+}
+
+.license a:link, .license a:visited, .license a:hover, .license a:active {
+	text-decoration: none;
+}
+
+.area_container {
+	margin: auto;
+	width: 740px;
+	background-color: #91e467;
+	border: 4px solid #aaaaaa;
+	border-radius: 6px;
+}
+
+.area_container_title {
+	margin:auto;
+	padding: 4px;
+	width: 200px;
+	font-weight: bold;
+	font-size: 28px;
+}
+
+.area_inner_container {
+	border-top: 4px solid #aaaaaa;
+	padding: 10px 8px 10px 30px;
+	background-color: #eeeeee;
+	height: 170px;
+	overflow-y: scroll;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.area_span {
+	float: left;
+	padding: 4px 10px 4px 10px;
+	cursor: pointer;
+}
+
+.area_span:hover {
+	background-color: #aaaaaa;
+}
+
+/* ==== Mouse/Cursor related styles ==== */
+
+.no_clicks {
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+}
+
+.no_pointers {
+	pointer-events: none;
+}
+
+/* ==== Tooltip Styles ==== */
+/* taken from w3schools example here: http://www.w3schools.com/css/css_tooltip.asp */
+.tooltip_container {
+	cursor: context-menu;
+	position: relative;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 400px;
+	background-color: #888888;
+	color: black;
+	font-weight: normal;
+	text-align: center;
+	padding: 5px 0px;
+	border: 2px solid #555555;
+	border-radius: 6px;
+	
+	position: absolute;
+	top: 24px;
+	left: 30px;
+	z-index: 3;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.sp_active .tooltip_container {
+	cursor: pointer;
+}
+
+/* ======== PLAYER INFO STYLES ========== */
+.player_stats_container {
+	
+}
+
+.player_level_container {
+	position: relative;
+	font-weight: bold;
+	font-size: 28px;
+	padding-bottom: 6px;
+}
+
+.player_level_prefix {
+	float: left;
+	width: 75px;
+	color: #888888;
+}
+
+.player_level {
+	float: left;
+	width: 200px;
+	text-align: right;
+}
+
+.player_exp_container {
+	position: relative;
+	top: 32px;
+	height: 20px;
+	width: 394px;
+	background-color: #669966;
+	border: 2px solid #555555;
+}
+
+.player_exp_text {
+	z-index: 1;
+	position: absolute;
+	height: 20px;
+	padding-left: 5px;
+	color: white;
+	font-weight: bold;
+	text-align: left;
+}
+
+.player_exp_bar {
+	z-index: 0;
+	position: absolute;
+	left: 0px;
+	height: 20px;
+	background-color: #33cc33;
+}
+
+.player_sp_container {
+	position: relative;
+	top: 50px;
+}
+
+.sp_count {
+	text-align: center;
+	font-weight: bold;
+	color: #3399ff;
+	width: 64px;
+	border-width: 0px 2px 0px 2px;
+	border-color: #888888;
+	border-style: solid;
+}
+
+.sp_inactive {
+	text-align: center;
+	font-weight: bold;
+	font-size: 32;
+	background-color: #cccccc;
+	color: #bbbbbb;
+}
+
+.sp_active {
+	cursor: pointer;
+	text-align: center;
+	font-weight: bold;
+	font-size: 32;
+	background-color: #4ce64c;
+	color: green;
+}
+
+.stat_cell {
+	font-weight: bold;
+	text-align: right;
+	width: 80px;
+}
+
+.skill_cell {
+	width: 145px;
+}
+
+table {
+	width: 394px;
+}
+
+td {
+	padding: 10px 6px 10px 6px;
+}
+/* ======== DAMAGE & EXP NUMBER RELATED STYLES =========== */
+.dmg_container {
+	margin: auto;
+	height: 100px;
+	width: 100px;
+}
+
+.num_container {
+	margin: auto;
+	position: absolute;
+	top: 33px; /* margin of BODY + border-width of main_container & padding of enemy_divs_container*/
+	height: 100px;
+	text-align: center;
+}
+
+.dps_num_container {
+	z-index: 4;
+}
+
+.dmg_num_container {
+	z-index: 5;
+}
+
+.exp_num_container {
+	z-index: 6;
+}
+
+.dmg_nums {
+	margin: auto;
+	position: relative;
+	top: 75px;
+	width: 100px;
+}
+
+.dps_nums {
+	margin: auto;
+	position: relative;
+	top: 75px;
+	width: 100px;
+}
+
+/* === DAMAGE FONT STYLES === */
+.font_dps_dmg {
+	font-size: 18px;
+	font-weight: bold;
+	color: gray;
+}
+
+.font_dmg {
+	font-size: 18px;
+	font-weight: bold;
+	color: #cc6600;
+}
+
+.font_crit_dmg {
+	font-size: 22px;
+	font-weight: bold;
+	font-style: italic;
+	color: #cc3300;
+}
+
+/* ======== ENEMY RELATED STYLES =========== */
+.enemy_container {
+	margin: auto;
+	position: relative;
+	height: 100px;
+}
+
+.enemy_square {
+	cursor: pointer;
+	position: relative;
+	margin: auto;
+	height: 100px;
+	width: 100px;
+	border: 2px solid black;
+}
+
+.enemy_level_container {
+	position: relative;
+	margin: auto;
+	top: 40px;    /* below health_container top */
+	left: 4px;
+	width: 274px;
+	font-size: 24px;
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+.enemy_level_text {
+	color: #777777;
+	float: left;
+}
+
+.enemy_level_num {
+	width: 70px;
+	float: left;
+	text-align: center;
+	color: #333333;
+}
+
+.enemy_type {
+	float: left;
+	padding-left: 4px;
+	text-align: left;
+	color: #777777;
+}
+
+/* ======== HEALTH BAR RELATED STYLES =========== */
+.health_container {
+	margin: auto;
+	position: relative;
+	top: 20px;
+	height: 20px;
+	width: 150px;
+	background-color: gray;
+	border: 2px solid #555555;
+}
+.health_bar_text {
+	z-index: 1;
+	position: absolute;
+	right: 0px;
+	width: 145px;
+	padding-right: 5px;
+	color: white;
+	font-weight: bold;
+	text-align: right;
+}
+
+.health_bar {
+	z-index: 0;
+	position: absolute;
+	right: 0px;
+	height: 20px;
+	width: 150px;
+	background-color: darkred;
+}

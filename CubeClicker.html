@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Cube Clicker v0.1</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="CubeClicker.js"></script>
+	<link rel="stylesheet" href="CubeClicker.css">
+</head>
+
+<body>
+<div class="main_container">
+	<div class="player_stats_container">
+		<div class="player_level_container no_clicks no_pointers">
+			<div class="player_level_prefix no_clicks no_pointers">LEVEL </div>
+			<div class="player_level no_clicks no_pointers"></div>
+		</div>
+		<div class="player_exp_container no_clicks no_pointers">
+			<div class="player_exp_text no_clicks no_pointers"></div>
+			<div class="player_exp_bar no_clicks no_pointers"></div>
+		</div>
+		<div class="player_sp_container">
+			<table>
+				<tr>
+					<td class="skill_point_count sp_inactive no_clicks no_pointers">0</td>
+					<td class="sp_count no_clicks">
+						<div class='tooltip_container tooltip'>SP
+							<span class="tooltiptext">
+								Skill Points (SP) are gained each time you level up. 
+								You can spend SP on skills to make them better.
+							</span>
+						</div>
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="dmg_sp_cell sp_inactive no_clicks no_pointers">
+						<div class="tooltip_container tooltip">+
+							<span class="tooltiptext">Click to increase your Click Damage</span>
+						</div>
+					</td>
+					<td class="dmg_sp_count sp_count no_clicks no_pointers"></td>
+					<td class="skill_cell no_clicks">
+						<div class="tooltip_container tooltip">Click Damage
+							<span class="tooltiptext">
+								Click Damage is the amount of damage you do with each click.
+							</span>
+						</div>
+					</td>
+					<td class="player_dmg stat_cell no_clicks no_pointers"></td>
+				</tr>
+				<tr>
+					<td class="dps_sp_cell sp_inactive no_clicks no_pointers">
+						<div class="tooltip_container tooltip">+
+							<span class="tooltiptext">Click to increase your DPS Amount</span>
+						</div>
+					</td>
+					<td class="dps_sp_count sp_count no_clicks no_pointers"></td>
+					<td class="skill_cell no_clicks">
+						<div class="tooltip_container tooltip">DPS Amount
+							<span class="tooltiptext">
+								Damage Per Second (DPS) is the amount of passive damage done each second.
+							</span>
+						</div>
+					</td>
+					<td class="player_dps stat_cell no_clicks no_pointers"></td>
+				</tr>
+				<tr>
+					<td class="crit_chance_sp_cell sp_inactive no_clicks no_pointers">
+						<div class="tooltip_container tooltip">+
+							<span class="tooltiptext">Click to increase your Critical Chance percentage</span>
+						</div>
+					</td>
+					<td class="crit_chance_sp_count sp_count no_clicks no_pointers"></td>
+					<td class="skill_cell no_clicks">
+						<div class="tooltip_container tooltip">Critical Chance %
+							<span class="tooltiptext">
+								Critical Chance is the chance you have of making a critical hit.
+							</span>
+						</div>
+					</td>
+					<td class="player_crit_chance stat_cell no_clicks no_pointers"></td>
+				</tr>
+				<tr>
+					<td class="crit_mult_sp_cell sp_inactive no_clicks no_pointers">
+						<div class="tooltip_container tooltip">+
+							<span class="tooltiptext">Click to increase your Critical Multiplier</span>
+						</div>
+					</td>
+					<td class="crit_mult_sp_count sp_count no_clicks no_pointers"></td>
+					<td class="skill_cell no_clicks">
+						<div class="tooltip_container tooltip">Critical Multiplier
+							<span class="tooltiptext">
+								Critical Multiplier is the amount your damage is multiplied by when you make a critical hit.
+							</span>
+						</div>
+					</td>
+					<td class="player_crit_mult stat_cell no_clicks no_pointers"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="enemy_divs_container no_clicks">
+		<div class="dmg_container no_clicks no_pointers">
+				<div class="dps_num_container num_container no_clicks no_pointers"></div>
+				<div class="dmg_num_container num_container no_clicks no_pointers"></div>
+				<div class="exp_num_container num_container no_clicks no_pointers"></div>
+		</div>
+		<div class="enemy_container no_clicks"><div class="enemy_square"></div></div>
+		<div class="health_container no_clicks no_pointers">
+			<div class="health_bar_text no_clicks no_pointers"></div>
+			<div class="health_bar no_clicks no_pointers"></div>
+		</div>
+		<div class="enemy_level_container no_clicks no_pointers">
+			<div class="enemy_level_text">LEVEL </div>
+			<div class="enemy_level_num"></div>
+			<div class="enemy_type"> SQUARE</div>
+		</div>
+	</div>
+</div>
+<br />
+<div class="area_container"><div class="area_container_title">Area Level</div>
+	<div class="area_inner_container"></div>
+</div>
+<div class="version_license_container">
+	<div class="version_license">
+		<div class="version">v0.1</div>
+		<div class="license">by Gene Dodge <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a></div>
+	</div>
+</div>
+</body>
+
+</html>
