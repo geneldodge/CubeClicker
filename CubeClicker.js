@@ -1,4 +1,11 @@
 
+// css color definitions
+var areaColorEasy = "#91e467";
+var areaColorMedium = "#e4e467";
+var areaColorHard = "#e4a667";
+var areaColorNightmare = "#e46767";
+var areaColorSelected = areaColorEasy;
+
 // base numbers for damages, crits, etc
 var playerLevel = 1;
 var enemyLevel = 1;
@@ -307,6 +314,20 @@ function resetEnemy() {
 	// set enemy level
 	enemyLevel = areaNumber;
 	
+	if (playerLevel >= areaNumber) {
+		areaColorSelected = areaColorEasy;
+	} else if ((playerLevel + 4) >= areaNumber) {
+		areaColorSelected = areaColorMedium;
+	} else if ((playerLevel + 10) >= areaNumber) {
+		areaColorSelected = areaColorHard;
+	} else {
+		areaColorSelected = areaColorNightmare;
+	}
+	
+	// highlight the area that's in use in the proper color
+	$('.area_container').css("background-color", areaColorSelected);
+	$('.area_' + areaNumber).css("background-color", areaColorSelected);
+	
 	// reset enemy health to full
 	enemyCurrHealth = Math.floor(Math.pow(enemyLevel / enemyHealthIncreaseConst, enemyHealthIncreasePower));
 	healthBarCurrWidth = healthBarTotalWidth;
@@ -373,7 +394,18 @@ function tickDps() {
 function generateAreaList(areasToGenerate) {
 	for (i = 1; i <= areasToGenerate; i++) {
 		
-		var newAreaSpan = $("<span class='area_span' id='" + i + "'>" + i + "</span>").on("click", function(){ areaNumber = $(this).attr('id'); resetEnemy(); });
+		var newAreaSpan = $("<span class='area_span area_" + i + "' id='" + i + "'>" + i + "</span>").on("click", function() {
+			
+			// recolor the background of current level first
+			$('.area_' + areaNumber).css("background-color","transparent");
+			
+			// switch area number
+			areaNumber = $(this).attr('id');
+			
+			// reset enemy so level changes
+			resetEnemy();
+		});
+		
 		$('.area_inner_container').append(newAreaSpan);
 		
 	}
