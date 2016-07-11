@@ -109,6 +109,12 @@ $(document).ready(function(){
 	$(".player_crit_mult").text(formatNum(critMultiplier,2));
 	$(".player_crit_chance").text(critChance);
 	
+	// color difficulties
+	$('.diff_easy').css("background-color", areaColorEasy);
+	$('.diff_med').css("background-color", areaColorMedium);
+	$('.diff_hard').css("background-color", areaColorHard);
+	$('.diff_nightmare').css("background-color", areaColorNightmare);
+	
 	// set up version and licensing stuff
 	$('.version_notes_link').on("click", function() {
 		$('.version_notes_container').toggle();
@@ -345,7 +351,7 @@ function resetEnemy() {
 	}
 	
 	// highlight the area that's in use in the proper color
-	$('.area_container').css("background-color", areaColorSelected);
+	$('.area_pick_container').css("background-color", areaColorSelected);
 	$('.area_' + areaNumber).css("background-color", areaColorSelected);
 	
 	// reset enemy health to full
@@ -426,7 +432,7 @@ function generateAreaList(areasToGenerate) {
 			resetEnemy();
 		});
 		
-		$('.area_inner_container').append(newAreaSpan);
+		$('.area_pick_inner_container').append(newAreaSpan);
 		
 	}
 }
